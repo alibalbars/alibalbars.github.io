@@ -24,9 +24,9 @@ jobs:
         type: now
         from_branch: develop
         target_branch: master
-        github_token: ${{ github.token }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: print token
-      run: ${{ github.token }}
+      run: ${{ secrets.GITHUB_TOKEN }}
     # - name: Merge master back to dev
     #   run: |
     #       git fetch origin
