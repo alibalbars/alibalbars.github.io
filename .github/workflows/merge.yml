@@ -1,0 +1,25 @@
+# Develop branch'ine bir pull request merge'lendiginde, develop branchini master brancine merge'ler
+name: Merge to master
+
+on: 
+  pull_request:
+    branches: [develop]
+    types: [closed]
+
+jobs:
+  merge-master-back-to-dev:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set Git config
+      run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "Github Actions"
+    - name: Merge master back to dev
+      run: |
+          git fetch --unshallow
+          git checkout master
+          git pull
+          git merge --no-ff dev -m "Auto-merge dev to master"
+          git push
