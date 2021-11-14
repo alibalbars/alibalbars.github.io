@@ -20,8 +20,8 @@ jobs:
           git config user.email "<>"
     - name: Merge master back to dev
       run: |
-          git fetch --unshallow
+          git fetch origin
           git checkout master
-          git pull
+          git pull origin master
           git merge --no-ff develop -m "Auto-merge develop to master"
-          git push
+          git push origin master
