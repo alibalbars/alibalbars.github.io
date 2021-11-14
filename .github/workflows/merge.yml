@@ -18,15 +18,28 @@ jobs:
       run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-    - name: Merge develop -> master
-      uses: devmasx/merge-branch@master
+    - name: Set up Node
+      uses: actions/setup-node@v1
       with:
-        type: now
-        from_branch: develop
-        target_branch: master
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: print token
-      run: ${{ secrets.GITHUB_TOKEN }}
+        node-version: 12
+    - name: Opening pull request
+      id: pull
+      uses: tretuna/sync-branches@1.4.0
+      with:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        FROM_BRANCH: "develop"
+        TO_BRANCH: "master"
+
+    # - name: Merge develop -> master
+    #   uses: devmasx/merge-branch@master
+    #   with:
+    #     type: now
+    #     from_branch: develop
+    #     target_branch: master
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    # - name: print token
+    #   run: ${{ secrets.GITHUB_TOKEN }}
+
     # - name: Merge master back to dev
     #   run: |
     #       git fetch origin
