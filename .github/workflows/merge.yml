@@ -12,16 +12,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-        token: ${{ github.token }}
+      # with:
+      #   token: ${{ github.token }}
     - name: Set Git config
       run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-    - name: Merge master back to dev
-      run: |
-          git fetch origin
-          git checkout master
-          git pull origin master
-          git merge --no-ff develop -m "Auto-merge develop to master"
-          git push origin master
+    - name: Merge develop -> master
+      uses: devmasx/merge-branch@master
+      with:
+        type: now
+        from_branch: develop
+        target_branch: master
+        github_token: ${{ github.token }}
+    - name: print token
+      run: ${{ github.token }}
+    # - name: Merge master back to dev
+    #   run: |
+    #       git fetch origin
+    #       git checkout master
+    #       git pull origin master
+    #       git merge --no-ff develop -m "Auto-merge develop to master"
+    #       git push origin master
