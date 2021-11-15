@@ -12,12 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      # with:
-      #   token: ${{ github.token }}
+      with:
+        fetch-depth: 0
+        token: ${{ gtihub.token }}
     - name: Set Git config
       run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
+          git config user.name "action@github.com"
+          git config user.email "github-actions"
     - name: Set up Node
       uses: actions/setup-node@v1
       with:
@@ -29,6 +30,8 @@ jobs:
           git pull origin master --allow-unrelated-histories
           git merge --no-ff develop -m "Auto-merge develop to master" --allow-unrelated-histories
           git push origin master
+      env: 
+        REPO_KEY: ${{ gtihub.token }}
 
 
     # - name: Opening pull request
