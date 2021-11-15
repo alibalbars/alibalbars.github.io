@@ -15,13 +15,14 @@ jobs:
       with:
         fetch-depth: 0
         # token: ${{ github.token }}
-    - uses: oleksiyrudenko/gha-git-credentials@v2-latest
-      with:
-        token: '${{ github.token }}'
+    # - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+    #   with:
+    #     token: '${{ github.token }}'
     - name: Set Git config
       run: |
           git config user.name "actions"
           git config user.email "github-actions@github.com"
+          git config --local --unset-all "http.https://github.com/.extraheader"
     - name: Set up Node
       uses: actions/setup-node@v1
       with:
