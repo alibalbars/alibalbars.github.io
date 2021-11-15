@@ -27,12 +27,15 @@ jobs:
       with:
         node-version: 12
     - name: Merge master back to dev
+      uses: oleksiyrudenko/gha-git-credentials@v2-latest
+      with: 
+        token: '${{ secrets.GITHUB_TOKEN }}'
       run: |
-          git fetch origin
-          git checkout master
-          git pull origin master --allow-unrelated-histories
-          git merge --no-ff develop -m "Auto-merge develop to master" --allow-unrelated-histories
-          git push origin master
+        git fetch origin
+        git checkout master
+        git pull origin master --allow-unrelated-histories
+        git merge --no-ff develop -m "Auto-merge develop to master" --allow-unrelated-histories
+        git push origin master
 
 
     # - name: Opening pull request
