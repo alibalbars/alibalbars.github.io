@@ -22,7 +22,7 @@ jobs:
       run: |
           git config user.name "actions"
           git config user.email "github-actions@github.com"
-          git config --local --unset-all "http.https://github.com/.extraheader"
+          git config --local --unset-all "https://github.com/.extraheader"
     - name: Set up Node
       uses: actions/setup-node@v1
       with:
