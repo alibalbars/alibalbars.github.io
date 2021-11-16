@@ -2,9 +2,15 @@
 name: Merge to master
 
 on: 
-  pull_request:
-    branches: [develop]
-    types: [closed]
+  # pull_request:
+  #   branches: [develop]
+  #   types: [closed]
+  push: 
+    branches: 
+      - develop
+
+permissions: 
+  contents: write
 
 jobs:
   merge-master-back-to-dev:
